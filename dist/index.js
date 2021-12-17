@@ -2046,9 +2046,11 @@ function run() {
                 .trim();
             console.log('pwd: ' + currentDirectory);
             const codeCoverageNew = (JSON.parse(fs_1.default
-                .readFileSync(`${currentDirectory}/coverage-summary-new.json'`)
+                .readFileSync(`${currentDirectory}/redash/managed_redash/coverage-summary-new.json`)
                 .toString()));
-            const codeCoverageOld = (JSON.parse(fs_1.default.readFileSync(`${currentDirectory}/coverage-summary.json'`).toString()));
+            const codeCoverageOld = (JSON.parse(fs_1.default
+                .readFileSync(`${currentDirectory}/redash/managed_redash/coverage-summary.json`)
+                .toString()));
             const diffChecker = new DiffChecker_1.DiffChecker(codeCoverageNew, codeCoverageOld);
             let messageToPost = `## Test coverage results :test_tube: \n
     Code coverage diff between base branch:${branchNameBase} and head branch: ${branchNameHead} \n\n`;

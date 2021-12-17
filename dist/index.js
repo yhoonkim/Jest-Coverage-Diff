@@ -2044,13 +2044,15 @@ function run() {
             const currentDirectory = child_process_1.execSync('pwd')
                 .toString()
                 .trim();
-            console.log('pwd: ' + currentDirectory);
+            console.log(`NEW: ${currentDirectory}/redash/managed_redash/coverage-summary-new.json`);
+            console.log(`OLD: ${currentDirectory}/redash/managed_redash/coverage-summary.json`);
             const codeCoverageNew = (JSON.parse(fs_1.default
-                .readFileSync(`${currentDirectory}/redash/managed_redash/coverage-summary-new.json`)
+                .readFileSync(`redash/managed_redash/coverage-summary-new.json`)
                 .toString()));
             const codeCoverageOld = (JSON.parse(fs_1.default
-                .readFileSync(`${currentDirectory}/redash/managed_redash/coverage-summary.json`)
+                .readFileSync(`redash/managed_redash/coverage-summary.json`)
                 .toString()));
+            console.log('Ok, I got the results. Let me diff them.');
             const diffChecker = new DiffChecker_1.DiffChecker(codeCoverageNew, codeCoverageOld);
             let messageToPost = `## Test coverage results :test_tube: \n
     Code coverage diff between base branch:${branchNameBase} and head branch: ${branchNameHead} \n\n`;

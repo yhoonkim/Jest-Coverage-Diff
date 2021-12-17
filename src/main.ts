@@ -30,14 +30,18 @@ async function run(): Promise<void> {
     const currentDirectory = execSync('pwd')
       .toString()
       .trim()
-    console.log('pwd: ' + currentDirectory)
+
+    console.log(
+      `NEW: ${currentDirectory}/redash/managed_redash/coverage-summary-new.json`
+    )
+    console.log(
+      `OLD: ${currentDirectory}/redash/managed_redash/coverage-summary.json`
+    )
 
     const codeCoverageNew = <CoverageReport>(
       JSON.parse(
         fs
-          .readFileSync(
-            `${currentDirectory}/redash/managed_redash/coverage-summary-new.json`
-          )
+          .readFileSync(`redash/managed_redash/coverage-summary-new.json`)
           .toString()
       )
     )
@@ -45,12 +49,12 @@ async function run(): Promise<void> {
     const codeCoverageOld = <CoverageReport>(
       JSON.parse(
         fs
-          .readFileSync(
-            `${currentDirectory}/redash/managed_redash/coverage-summary.json`
-          )
+          .readFileSync(`redash/managed_redash/coverage-summary.json`)
           .toString()
       )
     )
+
+    console.log('Ok, I got the results. Let me diff them.')
 
     const diffChecker: DiffChecker = new DiffChecker(
       codeCoverageNew,

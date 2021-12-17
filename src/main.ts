@@ -31,17 +31,11 @@ async function run(): Promise<void> {
       .toString()
       .trim()
 
-    console.log(
-      `NEW: ${currentDirectory}/redash/managed_redash/coverage-summary-new.json`
-    )
-    console.log(
-      `OLD: ${currentDirectory}/redash/managed_redash/coverage-summary.json`
-    )
 
     const codeCoverageNew = <CoverageReport>(
       JSON.parse(
         fs
-          .readFileSync(`redash/managed_redash/coverage-summary-new.json`)
+          .readFileSync(`redash/managed_redash/temp/coverage-summary.json`)
           .toString()
       )
     )

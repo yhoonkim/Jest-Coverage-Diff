@@ -2045,11 +2045,10 @@ function run() {
                 .toString()
                 .trim();
             const codeCoverageNew = (JSON.parse(fs_1.default
-                .readFileSync(`redash/managed_redash/temp/coverage-summary.json`)
+                .readFileSync(`redash/managed_redash/new/coverage-summary.json`)
                 .toString()));
-            console.log('hi');
             const codeCoverageOld = (JSON.parse(fs_1.default
-                .readFileSync(`redash/managed_redash/coverage-summary.json`)
+                .readFileSync(`redash/managed_redash/base/coverage-summary.json`)
                 .toString()));
             console.log('Ok, I got the results. Let me diff them.');
             const diffChecker = new DiffChecker_1.DiffChecker(codeCoverageNew, codeCoverageOld);

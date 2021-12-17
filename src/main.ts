@@ -34,15 +34,15 @@ async function run(): Promise<void> {
     const codeCoverageNew = <CoverageReport>(
       JSON.parse(
         fs
-          .readFileSync(`redash/managed_redash/temp/coverage-summary.json`)
+          .readFileSync(`redash/managed_redash/new/coverage-summary.json`)
           .toString()
       )
     )
-    console.log('hi')
+
     const codeCoverageOld = <CoverageReport>(
       JSON.parse(
         fs
-          .readFileSync(`redash/managed_redash/coverage-summary.json`)
+          .readFileSync(`redash/managed_redash/base/coverage-summary.json`)
           .toString()
       )
     )

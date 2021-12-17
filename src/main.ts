@@ -35,7 +35,7 @@ async function run(): Promise<void> {
       JSON.parse(
         fs
           .readFileSync(
-            `redash/managed_redash/.coverage/new/coverage-summary.json`
+            `new/redash/managed_redash/.coverage/coverage-summary.json`
           )
           .toString()
       )
@@ -45,7 +45,7 @@ async function run(): Promise<void> {
       JSON.parse(
         fs
           .readFileSync(
-            `redash/managed_redash/.coverage/base/coverage-summary.json`
+            `base/redash/managed_redash/.coverage/coverage-summary.json`
           )
           .toString()
       )

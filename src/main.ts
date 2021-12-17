@@ -31,7 +31,6 @@ async function run(): Promise<void> {
       .toString()
       .trim()
 
-
     const codeCoverageNew = <CoverageReport>(
       JSON.parse(
         fs

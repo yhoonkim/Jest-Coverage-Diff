@@ -2044,10 +2044,8 @@ function run() {
             const currentDirectory = child_process_1.execSync('pwd')
                 .toString()
                 .trim();
-            console.log(`NEW: ${currentDirectory}/redash/managed_redash/coverage-summary-new.json`);
-            console.log(`OLD: ${currentDirectory}/redash/managed_redash/coverage-summary.json`);
             const codeCoverageNew = (JSON.parse(fs_1.default
-                .readFileSync(`redash/managed_redash/coverage-summary-new.json`)
+                .readFileSync(`redash/managed_redash/temp/coverage-summary.json`)
                 .toString()));
             console.log('hi');
             const codeCoverageOld = (JSON.parse(fs_1.default

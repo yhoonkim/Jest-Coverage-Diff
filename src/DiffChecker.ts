@@ -13,33 +13,63 @@ export class DiffChecker {
   private diffCoverageReport: DiffCoverageReport = {}
   constructor(
     coverageReportNew: CoverageReport,
-    coverageReportOld: CoverageReport
+    coverageReportOld: CoverageReport,
+    currentDirectory: string
   ) {
+    this.diffCoverageReport.total = {
+      branches: {
+        newPct: this.getPercentage(coverageReportNew.total?.branches),
+        oldPct: this.getPercentage(coverageReportOld.total?.branches)
+      },
+      statements: {
+        newPct: this.getPercentage(coverageReportNew.total?.statements),
+        oldPct: this.getPercentage(coverageReportOld.total?.statements)
+      },
+      lines: {
+        newPct: this.getPercentage(coverageReportNew.total?.lines),
+        oldPct: this.getPercentage(coverageReportOld.total?.lines)
+      },
+      functions: {
+        newPct: this.getPercentage(coverageReportNew.total?.functions),
+        oldPct: this.getPercentage(coverageReportOld.total?.functions)
+      }
+    }
+
+    const newPrefix =
+      currentDirectory + '/new/redash/managed_redash/packages/viz/'
+    const oldPrefix =
+      currentDirectory + '/base/redash/managed_redash/packages/viz/'
     const reportNewKeys = Object.keys(coverageReportNew).map(key =>
-      key.replace('new/redash/managed_redash/packages/viz/', '')
+      key.replace(newPrefix, '')
     )
     const reportOldKeys = Object.keys(coverageReportOld).map(key =>
-      key.replace('base/redash/managed_redash/packages/viz/', '')
+      key.replace(oldPrefix, '')
     )
     const reportKeys = new Set([...reportNewKeys, ...reportOldKeys])
-
+    console.log(reportKeys)
     for (const filePath of reportKeys) {
+      if (filePath === 'total') {
+        continue
+      }
+      const n = coverageReportNew[newPrefix + filePath]
+      const o = coverageReportOld[oldPrefix + filePath]
+
       this.diffCoverageReport[filePath] = {
         branches: {
-          newPct: this.getPercentage(coverageReportNew[filePath]?.branches),
-          oldPct: this.getPercentage(coverageReportOld[filePath]?.branches)
+          newPct: this.getPercentage(n?.branches),
+          oldPct: this.getPercentage(o?.branches)
         },
         statements: {
-          newPct: this.getPercentage(coverageReportNew[filePath]?.statements),
-          oldPct: this.getPercentage(coverageReportOld[filePath]?.statements)
+          newPct: this.getPercentage(n?.statements),
+          oldPct: this.getPercentage(o?.statements)
         },
         lines: {
-          newPct: this.getPercentage(coverageReportNew[filePath]?.lines),
-          oldPct: this.getPercentage(coverageReportOld[filePath]?.lines)
+          newPct: this.getPercentage(n?.lines),
+          oldPct: this.getPercentage(o?.lines)
         },
         functions: {
-          newPct: this.getPercentage(coverageReportNew[filePath]?.functions),
-          oldPct: this.getPercentage(coverageReportOld[filePath]?.functions)
+          newPct: this.getPercentage(n?.functions),
+          oldPct: this.getPercentage(o?.functions)
         }
       }
     }

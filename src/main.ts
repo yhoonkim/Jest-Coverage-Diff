@@ -55,7 +55,8 @@ async function run(): Promise<void> {
 
     const diffChecker: DiffChecker = new DiffChecker(
       codeCoverageNew,
-      codeCoverageOld
+      codeCoverageOld,
+      currentDirectory
     )
     let messageToPost = `## Test coverage results :test_tube: \n
     Code coverage diff between base branch:${branchNameBase} and head branch: ${branchNameHead} \n\n`

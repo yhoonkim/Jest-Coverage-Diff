@@ -6724,8 +6724,8 @@ class DiffChecker {
     constructor(coverageReportNew, coverageReportOld) {
         var _a, _b, _c, _d, _e, _f, _g, _h;
         this.diffCoverageReport = {};
-        const reportNewKeys = Object.keys(coverageReportNew);
-        const reportOldKeys = Object.keys(coverageReportOld);
+        const reportNewKeys = Object.keys(coverageReportNew).map(key => key.replace('new/redash/managed_redash/packages/viz/', ''));
+        const reportOldKeys = Object.keys(coverageReportOld).map(key => key.replace('base/redash/managed_redash/packages/viz/', ''));
         const reportKeys = new Set([...reportNewKeys, ...reportOldKeys]);
         for (const filePath of reportKeys) {
             this.diffCoverageReport[filePath] = {

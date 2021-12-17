@@ -15,8 +15,12 @@ export class DiffChecker {
     coverageReportNew: CoverageReport,
     coverageReportOld: CoverageReport
   ) {
-    const reportNewKeys = Object.keys(coverageReportNew)
-    const reportOldKeys = Object.keys(coverageReportOld)
+    const reportNewKeys = Object.keys(coverageReportNew).map(key =>
+      key.replace('new/redash/managed_redash/packages/viz/', '')
+    )
+    const reportOldKeys = Object.keys(coverageReportOld).map(key =>
+      key.replace('base/redash/managed_redash/packages/viz/', '')
+    )
     const reportKeys = new Set([...reportNewKeys, ...reportOldKeys])
 
     for (const filePath of reportKeys) {

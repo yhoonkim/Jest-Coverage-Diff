@@ -45,7 +45,7 @@ async function run(): Promise<void> {
           .toString()
       )
     )
-
+    console.log('hi')
     const codeCoverageOld = <CoverageReport>(
       JSON.parse(
         fs

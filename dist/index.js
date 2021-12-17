@@ -2049,6 +2049,7 @@ function run() {
             const codeCoverageNew = (JSON.parse(fs_1.default
                 .readFileSync(`redash/managed_redash/coverage-summary-new.json`)
                 .toString()));
+            console.log('hi');
             const codeCoverageOld = (JSON.parse(fs_1.default
                 .readFileSync(`redash/managed_redash/coverage-summary.json`)
                 .toString()));

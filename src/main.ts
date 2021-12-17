@@ -26,25 +26,26 @@ async function run(): Promise<void> {
     const commentIdentifier = `<!-- codeCoverageDiffComment -->`
     const deltaCommentIdentifier = `<!-- codeCoverageDeltaComment -->`
     let commentId = null
-    execSync(commandToRun)
-    const codeCoverageNew = <CoverageReport>(
-      JSON.parse(fs.readFileSync('coverage-summary.json').toString())
-    )
-    console.log('debug: hey')
-    execSync('/usr/bin/git fetch')
-    execSync('/usr/bin/git stash')
-    execSync(`/usr/bin/git checkout --progress --force ${branchNameBase}`)
-    if (commandAfterSwitch) {
-      execSync(commandAfterSwitch)
-    }
-    execSync(commandToRun)
-    const codeCoverageOld = <CoverageReport>(
-      JSON.parse(fs.readFileSync('coverage-summary.json').toString())
-    )
 
     const currentDirectory = execSync('pwd')
       .toString()
       .trim()
+    console.log('pwd: ' + currentDirectory)
+
+    const codeCoverageNew = <CoverageReport>(
+      JSON.parse(
+        fs
+          .readFileSync(`${currentDirectory}/coverage-summary-new.json'`)
+          .toString()
+      )
+    )
+
+    const codeCoverageOld = <CoverageReport>(
+      JSON.parse(
+        fs.readFileSync(`${currentDirectory}/coverage-summary.json'`).toString()
+      )
+    )
+
     const diffChecker: DiffChecker = new DiffChecker(
       codeCoverageNew,
       codeCoverageOld

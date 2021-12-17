@@ -2041,20 +2041,14 @@ function run() {
             const commentIdentifier = `<!-- codeCoverageDiffComment -->`;
             const deltaCommentIdentifier = `<!-- codeCoverageDeltaComment -->`;
             let commentId = null;
-            child_process_1.execSync(commandToRun);
-            const codeCoverageNew = (JSON.parse(fs_1.default.readFileSync('coverage-summary.json').toString()));
-            console.log('debug: hey');
-            child_process_1.execSync('/usr/bin/git fetch');
-            child_process_1.execSync('/usr/bin/git stash');
-            child_process_1.execSync(`/usr/bin/git checkout --progress --force ${branchNameBase}`);
-            if (commandAfterSwitch) {
-                child_process_1.execSync(commandAfterSwitch);
-            }
-            child_process_1.execSync(commandToRun);
-            const codeCoverageOld = (JSON.parse(fs_1.default.readFileSync('coverage-summary.json').toString()));
             const currentDirectory = child_process_1.execSync('pwd')
                 .toString()
                 .trim();
+            console.log('pwd: ' + currentDirectory);
+            const codeCoverageNew = (JSON.parse(fs_1.default
+                .readFileSync(`${currentDirectory}/coverage-summary-new.json'`)
+                .toString()));
+            const codeCoverageOld = (JSON.parse(fs_1.default.readFileSync(`${currentDirectory}/coverage-summary.json'`).toString()));
             const diffChecker = new DiffChecker_1.DiffChecker(codeCoverageNew, codeCoverageOld);
             let messageToPost = `## Test coverage results :test_tube: \n
     Code coverage diff between base branch:${branchNameBase} and head branch: ${branchNameHead} \n\n`;

@@ -30,6 +30,7 @@ async function run(): Promise<void> {
     const codeCoverageNew = <CoverageReport>(
       JSON.parse(fs.readFileSync('coverage-summary.json').toString())
     )
+    console.log('debug: hey')
     execSync('/usr/bin/git fetch')
     execSync('/usr/bin/git stash')
     execSync(`/usr/bin/git checkout --progress --force ${branchNameBase}`)
@@ -40,6 +41,7 @@ async function run(): Promise<void> {
     const codeCoverageOld = <CoverageReport>(
       JSON.parse(fs.readFileSync('coverage-summary.json').toString())
     )
+
     const currentDirectory = execSync('pwd')
       .toString()
       .trim()
